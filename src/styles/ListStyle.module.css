@@ -1,0 +1,31 @@
+.liTodo{
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    list-style-type: none;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(194, 185, 201);
+    border-radius: 1em;
+}
+.input{
+    border-radius: 10px;
+    padding: 1em;
+    margin: 10px;
+    font-size: 1em;
+    
+}
+.divTodo{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(194, 185, 201);
+    margin: 1em;
+    border-radius: 1em;
+}
+.completed{
+    text-decoration: line-through;
+}
+.btnInput{
+    background-color: rgb(194, 185, 201);
+}
