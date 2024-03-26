@@ -48,7 +48,7 @@ useEffect(() => {
             todos.map((todo) => (
                 <div className={style.divTodo}>
                     <li key={todo.id} completed={todo.completed} className={`${style.liTodo} ${todo.completed? style.completed:'' }`}> 
-                        <input type="checkbox" onChange={()=>handleCompleted(todo)} />
+                        <input type="checkbox" onChange={()=>handleCompleted(todo)} checked={todo.completed? 'checked':''}/>
                         <span>{todo.task}</span>
                     </li>
                     <button onClick={()=>handleClickDelete(todo)} className={style.btnInput}><img src={imgDel} alt="Delete"/>
