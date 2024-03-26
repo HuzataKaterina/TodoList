@@ -1,48 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import { v4 as uuid } from 'uuid';
-import style from '../styles/ListStyle.module.css'
-import { AddIcon } from './AddIcon';
+import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
+import style from "../styles/ListStyle.module.css";
+import { AddIcon } from "./AddIcon";
 
-export const AddTask = () => {   
-    const [todoFull, setTodoFull] = useState({
+import PropTypes from "prop-types";
+
+export const AddTask = ({ addTodo }) => {
+  const [todoFull, setTodoFull] = useState({
+    id: uuid(),
+    task: "",
+    completed: false,
+  });
+
+  const handleAddTask = () => {
+    if (todoFull.task !== "") {
+      addTodo(todoFull);
+      setTodoFull({
         id: uuid(),
-        task: '',
-        completed: false})
+        task: "",
+        completed: false,
+      });
+    }
+  };
 
-    const [todos, setTodos] = useState([]);
-
-    useEffect(() => {
-        const todos = JSON.parse(localStorage.getItem('todos'));
-        if (todos){
-            setTodos(todos)
-        }
-    },[])
-    
-    const handleAddTask = () => {
-
-        if (todoFull.task !== '') {
-            setTodos([...todos, todoFull]);
-            setTodoFull({
-                id: uuid(),
-                task: '', 
-                completed: false})
-        }
-        localStorage.setItem('todos', JSON.stringify(todos));        
-    };
-    
-    
-    const hadleChange = (e) =>{
-        setTodoFull((predTodoFull) => ({...predTodoFull, task:e.target.value }))
-    };
-
+  const hadleChange = (e) => {
+    setTodoFull((predTodoFull) => ({ ...predTodoFull, task: e.target.value }));
+  };
 
   return (
     <>
-        <input type="text" value={todoFull.task} onChange={hadleChange} className={style.input} placeholder='Enter your task'/>
-        <button onClick={handleAddTask}><AddIcon /></button>
-       
+      <input
+        type="text"
+        value={todoFull.task}
+        onChange={hadleChange}
+        className={style.input}
+        placeholder="Enter your task"
+      />
+      <button onClick={handleAddTask}>
+        <AddIcon />
+      </button>
     </>
-  )
-}
+  );
+};
 
-  
+AddTask.propTypes = {
+  addTodo: PropTypes.func.isRequired,
+};
