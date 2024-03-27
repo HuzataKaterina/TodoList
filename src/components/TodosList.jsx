@@ -25,16 +25,57 @@ export const TodosList = ({ todos, setTodos }) => {
     );
     localStorage.setItem("todos", JSON.stringify(todos));
   };
+
+  const handelClickAllTasks = () => {
+    const todos = JSON.parse(localStorage.getItem("todos"))
+    if (todos) { 
+      setTodos(todos) 
+    }
+  };
+
+  const handelClickNotCompleted = () => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    setTodos(
+      todos.filter((todo) => {
+        if (!todo.completed) {
+          return todo;
+        }
+      })
+    );
+  };
+
+  const handelClickCompleted = () => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    setTodos(
+      todos.filter((todo) => {
+        if (todo.completed) {
+          return todo;
+        }
+      })
+    );
+  };
   const handleClickDeleteAll = () => {
     localStorage.clear();
+    setTodos([])
   };
   return (
     <>
-      <div>
-        <button>All tasks</button>
-        <button>Completed tasks</button>
-        <button>Not completed tasks</button>
-        <button onClick={handleClickDeleteAll}>Delete all tasks</button>
+      <div className={style.divFilters}>
+        <button onClick={handelClickAllTasks} className={style.buttonFilters}>
+          All tasks
+        </button>
+        <button onClick={handelClickCompleted} className={style.buttonFilters}>
+          Completed
+        </button>
+        <button
+          onClick={handelClickNotCompleted}
+          className={style.buttonFilters}
+        >
+          Not completed
+        </button>
+        <button onClick={handleClickDeleteAll} className={style.buttonFilters}>
+          Delete all
+        </button>
       </div>
       <ul className={style.ulTodo}>
         {todos.map((todo) => (

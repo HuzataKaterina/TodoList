@@ -11,6 +11,11 @@ export const AddTask = ({ addTodo }) => {
     task: "",
     completed: false,
   });
+  const handleKeyDown = (event) => {
+    if (event.code === "Enter") {
+      handleAddTask();
+    }
+  };
 
   const handleAddTask = () => {
     if (todoFull.task !== "") {
@@ -33,6 +38,7 @@ export const AddTask = ({ addTodo }) => {
         type="text"
         value={todoFull.task}
         onChange={hadleChange}
+        onKeyDown={handleKeyDown}
         className={style.input}
         placeholder="Enter your task"
       />
