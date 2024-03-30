@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 export const TodosList = ({
   todos,
-  setTodos,
   deleteTodo,
   toggleComplete,
   deletAllTodos,

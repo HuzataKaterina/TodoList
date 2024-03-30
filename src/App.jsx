@@ -48,7 +48,6 @@ function App() {
       <AddTask addTodo={addTodo} />
       <TodosList
         todos={todos}
-        setTodos={setTodos}
         deleteTodo={deleteTodo}
         toggleComplete={toggleComplete}
         deletAllTodos={deletAllTodos}
