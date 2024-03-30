@@ -70,7 +70,7 @@ export const TodosList = ({
         </button>
       </div>
       <ul className={style.ulTodo}>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <div className={style.divTodo} key={todo.id}>
             <li
               key={todo.id}
