@@ -20,8 +20,6 @@ export const TodosList = ({
         return todo.completed;
       case "notCompleted":
         return !todo.completed;
-      case "all":
-        return todo;
       default:
         return todo;
     }
