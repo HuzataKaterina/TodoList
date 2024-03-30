@@ -1,43 +1,74 @@
 import React from "react";
+import { useState } from "react";
 import imgDel from "../images/delete.svg";
 import style from "../styles/ListStyle.module.css";
 
 import PropTypes from "prop-types";
 
-export const TodosList = ({ todos, setTodos }) => {
+export const TodosList = ({
+  todos,
+  setTodos,
+  deleteTodo,
+  toggleComplete,
+  deletAllTodos,
+}) => {
+  const [filter, setFilter] = useState("All");
+
+  const filteredTodos = todos.filter((todo) => {
+    switch (filter) {
+      case "completed":
+        return todo.completed;
+      case "notCompleted":
+        return !todo.completed;
+      default:
+        return todo;
+    }
+  });
+
   const handleClickDelete = (task) => {
-    const updatedTodos = todos.filter((todo) => {
-      return todo.id !== task.id;
-    });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    deleteTodo(task);
   };
 
   const handleCompleted = (task) => {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === task.id) {
-          return { ...todo, completed: !todo.completed };
-        } else {
-          return todo;
-        }
-      })
-    );
-    localStorage.setItem("todos", JSON.stringify(todos));
+    toggleComplete(task);
   };
+
   const handleClickDeleteAll = () => {
-    localStorage.clear();
+    deletAllTodos();
   };
   return (
     <>
-      <div>
-        <button>All tasks</button>
-        <button>Completed tasks</button>
-        <button>Not completed tasks</button>
-        <button onClick={handleClickDeleteAll}>Delete all tasks</button>
+      <div className={style.divFilters}>
+        <button
+          onClick={() => {
+            setFilter("all");
+          }}
+          className={style.buttonFilters}
+        >
+          All tasks
+        </button>
+        <button
+          onClick={() => {
+            setFilter("completed");
+          }}
+          className={style.buttonFilters}
+        >
+          Completed
+        </button>
+        <button
+          onClick={() => {
+            setFilter("notCompleted");
+          }}
+          className={style.buttonFilters}
+        >
+          Not completed
+        </button>
+        <button onClick={handleClickDeleteAll} className={style.buttonFilters}>
+          Delete all
+        </button>
       </div>
       <ul className={style.ulTodo}>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <div className={style.divTodo} key={todo.id}>
             <li
               key={todo.id}
@@ -69,4 +100,7 @@ export const TodosList = ({ todos, setTodos }) => {
 TodosList.propTypes = {
   todos: PropTypes.array.isRequired,
   setTodos: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  toggleComplete: PropTypes.func.isRequired,
+  deletAllTodos: PropTypes.func.isRequired,
 };

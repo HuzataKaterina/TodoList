@@ -6,11 +6,17 @@ import { AddIcon } from "./AddIcon";
 import PropTypes from "prop-types";
 
 export const AddTask = ({ addTodo }) => {
+  
   const [todoFull, setTodoFull] = useState({
     id: uuid(),
     task: "",
     completed: false,
   });
+  const handleKeyDown = (event) => {
+    if (event.code === "Enter") {
+      handleAddTask();
+    }
+  };
 
   const handleAddTask = () => {
     if (todoFull.task !== "") {
@@ -33,6 +39,7 @@ export const AddTask = ({ addTodo }) => {
         type="text"
         value={todoFull.task}
         onChange={hadleChange}
+        onKeyDown={handleKeyDown}
         className={style.input}
         placeholder="Enter your task"
       />
