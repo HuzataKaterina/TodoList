@@ -6,6 +6,7 @@ import { AddIcon } from "./AddIcon";
 import PropTypes from "prop-types";
 
 export const AddTask = ({ addTodo }) => {
+  
   const [todoFull, setTodoFull] = useState({
     id: uuid(),
     task: "",
