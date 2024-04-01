@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AddTask } from "./components/AddTask";
+import { TodoForm } from "./components/AddTask";
 import { TodosList } from "./components/TodosList";
 import "./App.css";
 function App() {
@@ -12,23 +12,23 @@ function App() {
   };
 
   const deleteTodo = (task) => {
-    const updatedTodos = todos.filter((todo) => {
+    const newTodos = todos.filter((todo) => {
       return todo.id !== task.id;
     });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const toggleComplete = (task) => {
-    const toggleTodos = todos.map((todo) => {
+    const newTodos = todos.map((todo) => {
       if (todo.id === task.id) {
         return { ...todo, completed: !todo.completed };
       } else {
         return todo;
       }
     });
-    setTodos(toggleTodos);
-    localStorage.setItem("todos", JSON.stringify(toggleTodos));
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const deletAllTodos = () => {
@@ -45,7 +45,7 @@ function App() {
 
   return (
     <>
-      <AddTask addTodo={addTodo} />
+      <TodoForm addTodo={addTodo} />
       <TodosList
         todos={todos}
         deleteTodo={deleteTodo}

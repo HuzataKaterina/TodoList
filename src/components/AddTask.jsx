@@ -5,8 +5,8 @@ import { AddIcon } from "./AddIcon";
 
 import PropTypes from "prop-types";
 
-export const AddTask = ({ addTodo }) => {
-  const [todoFull, setTodoFull] = useState({
+export const TodoForm = ({ addTodo }) => {
+  const [newTodo, setNewTodo] = useState({
     id: uuid(),
     task: "",
     completed: false,
@@ -18,9 +18,9 @@ export const AddTask = ({ addTodo }) => {
   };
 
   const handleAddTask = () => {
-    if (todoFull.task !== "") {
-      addTodo(todoFull);
-      setTodoFull({
+    if (newTodo.task !== "") {
+      addTodo(newTodo);
+      setNewTodo({
         id: uuid(),
         task: "",
         completed: false,
@@ -29,14 +29,14 @@ export const AddTask = ({ addTodo }) => {
   };
 
   const hadleChange = (e) => {
-    setTodoFull((predTodoFull) => ({ ...predTodoFull, task: e.target.value }));
+    setNewTodo((predNewTodo) => ({ ...predNewTodo, task: e.target.value }));
   };
 
   return (
     <div className={style.divAdd}>
       <input
         type="text"
-        value={todoFull.task}
+        value={newTodo.task}
         onChange={hadleChange}
         onKeyDown={handleKeyDown}
         className={style.input}
@@ -50,6 +50,6 @@ export const AddTask = ({ addTodo }) => {
   );
 };
 
-AddTask.propTypes = {
+TodoForm.propTypes = {
   addTodo: PropTypes.func.isRequired,
 };
