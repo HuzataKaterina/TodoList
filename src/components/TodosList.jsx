@@ -40,9 +40,11 @@ export const TodosList = ({
       <div className={style.divFilters}>
         <button
           onClick={() => {
-            setFilter("all");
+            setFilter("All");
           }}
-          className={style.buttonFilters}
+          className={`${style.buttonFilters} ${
+            filter === "All" ? style.selected : ""
+          }`}
         >
           All tasks
         </button>
@@ -50,7 +52,9 @@ export const TodosList = ({
           onClick={() => {
             setFilter("completed");
           }}
-          className={style.buttonFilters}
+          className={`${style.buttonFilters} ${
+            filter === "completed" ? style.selected : ""
+          }`}
         >
           Completed
         </button>
@@ -58,7 +62,9 @@ export const TodosList = ({
           onClick={() => {
             setFilter("notCompleted");
           }}
-          className={style.buttonFilters}
+          className={`${style.buttonFilters} ${
+            filter === "notCompleted" ? style.selected : ""
+          }`}
         >
           Not completed
         </button>
@@ -66,6 +72,7 @@ export const TodosList = ({
           Delete all
         </button>
       </div>
+
       <ul className={style.ulTodo}>
         {filteredTodos.map((todo) => (
           <div className={style.divTodo} key={todo.id}>
@@ -98,7 +105,6 @@ export const TodosList = ({
 
 TodosList.propTypes = {
   todos: PropTypes.array.isRequired,
-  setTodos: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deletAllTodos: PropTypes.func.isRequired,

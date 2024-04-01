@@ -6,7 +6,6 @@ import { AddIcon } from "./AddIcon";
 import PropTypes from "prop-types";
 
 export const AddTask = ({ addTodo }) => {
-  
   const [todoFull, setTodoFull] = useState({
     id: uuid(),
     task: "",
@@ -34,7 +33,7 @@ export const AddTask = ({ addTodo }) => {
   };
 
   return (
-    <>
+    <div className={style.divAdd}>
       <input
         type="text"
         value={todoFull.task}
@@ -42,11 +41,12 @@ export const AddTask = ({ addTodo }) => {
         onKeyDown={handleKeyDown}
         className={style.input}
         placeholder="Enter your task"
+        autoFocus
       />
-      <button onClick={handleAddTask}>
+      <button onClick={handleAddTask} className={style.btnAdd}>
         <AddIcon />
       </button>
-    </>
+    </div>
   );
 };
 
